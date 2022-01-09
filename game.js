@@ -43,6 +43,10 @@ export class Game {
         // this.ctx.drawImage(background, 100,200);
     }
 
+    clearAll() {
+        this.letters.clearAll();
+    }
+
     update(deltaTime) {
         this.gameObjects.forEach((object) => object.update(deltaTime));
     }

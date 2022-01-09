@@ -56,4 +56,7 @@ export class Letters {
     check_for_hit() {
 
     }
+    clearAll() {
+        this.letter_arr = [];
+    }
 }

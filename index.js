@@ -40,6 +40,7 @@ function gameLoop(timestamp) {
         game.update(deltaTime);
         game.draw(ctx);
     }
+    console.log(`${game.superbomb}`);
 
 
     requestAnimationFrame(gameLoop);

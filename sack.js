@@ -51,4 +51,5 @@ export class Sack {
     stop() {
         this.speed = 0;
     }
+
 }

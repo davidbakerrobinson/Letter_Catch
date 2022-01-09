@@ -3,10 +3,9 @@ import * as myGauge from './bomb_gauge.js';
 export class Superbombs {
     constructor(game) {
         this.lastTime = 0.0;
-        this.max_bombs = 3;
+        this.magazine = {max_bombs: 3, bombs_available: 3}
         this.animation_height = game.height;
         this.animation_width = game.width;
-        this.bombs_available = 3;
         this.game = game;
         this.gauge = new myGauge.Bomb_Gauge(game);
         this.fire_src = document.getElementById("rainbow_bomb");
@@ -18,9 +17,10 @@ export class Superbombs {
         
     }
     fire_bomb() {
-        if(this.bombs_available > 0) {
+        if(this.magazine.bombs_available > 0) {
         //play the animation clip and pause everything in game
         //console.log(this.lastTime);
+        console.log("It goes int the if");
         let lastTime = 0;
         let game = this.game;
         let elapsed_time = 0;
@@ -28,6 +28,7 @@ export class Superbombs {
         let fire_src = document.getElementById("rainbow_bomb");
         let ended = false;
         let total_time = 0;
+        let magazine = this.magazine;
         console.log(fire_src);
         //clear canvas
         function animation_loop(timestamp) {
@@ -44,14 +45,22 @@ export class Superbombs {
             }
             if(fire_src.ended != true) {
                 requestAnimationFrame(animation_loop);
-                ended = true;
+            }
+            else {
+                --magazine.bombs_available;
+                game.letters.clearAll();
+                game.bomb_ctx.clearRect(0,0,game.gameWidth, game.gameHeight);
+                fire_src.currentTime = 0; 
+                game.superbomb = false;
             }
         }
             fire_src.play();
         //could also use a sequential funciton if video is async
             requestAnimationFrame(animation_loop);
-            if(fire_src.ended)
-                --this.bombs_available;
+
+        }
+        else {
+            this.game.superbomb = false;
         }
     }
     // animation_loop(timestamp) {
@@ -77,6 +86,6 @@ export class Superbombs {
     
     }
     draw(deltaTime) {
-        this.gauge.draw_gauge(this.bombs_available);
+        this.gauge.draw_gauge(this.magazine.bombs_available);
     }
 }
