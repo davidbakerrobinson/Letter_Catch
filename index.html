@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Simple Game</title>
+    <meta charset="UTF-8" />
+    <style>
+        #gameScreen {
+            border: 1px solid black
+        }
+        .bomb_canvas {
+            position: absolute;
+            top: 0;
+        }
+        
+        img {
+            display: none;
+        }
+        video {
+            display: block;
+        }
+        .canvas-size {
+            width: 100vw;
+            height: 100vh;
+        }
+        #word_to_solve {
+            display: grid;
+            text-align: center;
+            font-size: 36px;
+        }
+        .red-blink {
+            color: red;
+            animation-duration: 1.5s;
+            animation-name: red-blink;
+            animation-iteration-count: infinite;
+        }
+
+        #gameScreen {
+            background: url('./assets/images/normal_background.png');
+            background-size: 100% 100%;
+        }
+
+        @keyframes red-blink {
+            from {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .green-text {
+            color: green;
+        }
+        .black-text {
+            color: black;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <canvas id="gameScreen"></canvas>
+    <canvas id="bomb_animation" class="bomb_canvas"></canvas>
+    <img id="sack" src="./assets/images/Santa-sack.png">
+    <img id="normal_background" src="./assets/images/normal_background.png">
+    <img id="bomb_thumbnail" src="./assets/images/available_bombs.png">
+    <video id="rainbow_bomb" 
+    height="450" 
+    width="450" 
+    preload="auto" 
+    src='./assets/videos/super_bomb.mp4' 
+    muted="false"
+    ></video>
+
+    <div id="word_to_solve"></div>
+    <script type="module" src="index.js">
+    </script>
+</body>
+
+</html>

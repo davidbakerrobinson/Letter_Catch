@@ -1,0 +1,9 @@
+.canvas-size {
+    width: 100vw;
+    height: 100vh;
+}
+
+#word_to_solve{
+    display: grid;
+    text-align: center;
+}
