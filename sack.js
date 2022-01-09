@@ -52,4 +52,8 @@ export class Sack {
         this.speed = 0;
     }
 
+    clearAll() {
+        this.rainbows.clearAll();
+    }
+
 }

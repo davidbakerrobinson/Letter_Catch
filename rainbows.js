@@ -39,4 +39,8 @@ export class Rainbows {
             rainbow.draw(ctx);
         });
     }
+
+    clearAll() {
+        this.rainbow_array = [];
+    }
 }

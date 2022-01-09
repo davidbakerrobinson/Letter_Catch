@@ -45,6 +45,7 @@ export class Game {
 
     clearAll() {
         this.letters.clearAll();
+        this.sack.clearAll();
     }
 
     update(deltaTime) {

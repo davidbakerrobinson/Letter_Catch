@@ -1,4 +1,5 @@
 import * as myGauge from './bomb_gauge.js';
+import * as superbomb_sound from './sounds.js';
 
 export class Superbombs {
     constructor(game) {
@@ -29,6 +30,7 @@ export class Superbombs {
         let ended = false;
         let total_time = 0;
         let magazine = this.magazine;
+        let explosion_sound = new superbomb_sound.Sounds('./assets/sounds/Angel-sound.wav');
         console.log(fire_src);
         //clear canvas
         function animation_loop(timestamp) {
@@ -48,13 +50,14 @@ export class Superbombs {
             }
             else {
                 --magazine.bombs_available;
-                game.letters.clearAll();
+                game.clearAll();
                 game.bomb_ctx.clearRect(0,0,game.gameWidth, game.gameHeight);
                 fire_src.currentTime = 0; 
                 game.superbomb = false;
             }
         }
             fire_src.play();
+            explosion_sound.play();
         //could also use a sequential funciton if video is async
             requestAnimationFrame(animation_loop);
 
