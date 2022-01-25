@@ -7,6 +7,7 @@ import * as myletters from './letters.js';
 import * as myRainbow from './rainbow.js';
 import * as myGame_Phrase from './Game_Phrase.js';
 import * as sup_bomb from './superbombs.js';
+import * as myPieces from './coal_pieces.js';
 /*
 const GAMESTATE = {
     PAUSED: 0,
@@ -34,10 +35,10 @@ export class Game {
         this.game_phrase = new myGame_Phrase.Game_Phrase(this);
         //this.ball = new myBall.Ball(this);
         this.letters = new myletters.Letters(this);
-        
+        this.coals = new myPieces.Coal_Pieces(this);
         //console.log(this.bombs);
         //this.rainbow = new myRainbow.Rainbow(this);
-        this.gameObjects = [this.sack, this.letters, this.bombs];
+        this.gameObjects = [this.sack, this.letters, this.bombs, this.coals];
 
         // let background = document.getElementById("normal_background");
         // this.ctx.drawImage(background, 100,200);
@@ -46,6 +47,7 @@ export class Game {
     clearAll() {
         this.letters.clearAll();
         this.sack.clearAll();
+        this.coals.clearAll();
     }
 
     update(deltaTime) {

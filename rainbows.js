@@ -27,7 +27,7 @@ export class Rainbows {
 
         //For now, just going to do update for each object in array
         this.rainbow_array = this.rainbow_array
-        .filter((rainbow)=>rainbow.letterCollide === false)
+        .filter((rainbow)=>rainbow.letterCollide === false && rainbow.coalCollide === false)
         .filter((rainbow)=>rainbow.offScreen === false)
         .map((rainbow)=> {
             rainbow.update(deltaTime);

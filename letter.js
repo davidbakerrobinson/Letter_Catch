@@ -26,6 +26,7 @@ export class Letter{
         let width = measure.width;
         this.letter_width = width;
         this.letter_height = measure.actualBoundingBoxAscent;
+        //this.letter_width = this.ctx.measureText(this.letter).width;
         this.successful_catch = new collisionSound.Sounds('./assets/sounds/Yeah.wav');
         this.bad_catch = new collisionSound.Sounds('./assets/sounds/error.wav');
         this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');

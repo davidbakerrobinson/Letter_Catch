@@ -15,6 +15,7 @@ export class  Rainbow{
         this.game = game;
         this.firing_speed = 600;
         this.letterCollide = false;
+        this.coalCollide = false;
         this.offScreen = false;
         this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');
         
@@ -50,6 +51,14 @@ export class  Rainbow{
             //need condition to detect collision between rainbow and letter
             //need to loop through every single letter
         }
+
+        this.game.coals.coal_arr.forEach((coal_piece)=>{
+            if(detectCollision(coal_piece,this,false,this.game)) {
+                console.log("THIS WORKS");
+                this.coalCollide = true;
+                coal_piece.hit = true;
+            }
+        });
 
         this.game.letters.letter_arr.forEach((letter)=> {
             //  console.log(`
