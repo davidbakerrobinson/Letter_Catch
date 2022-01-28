@@ -13,6 +13,7 @@ export class Letters {
         this.timeElapsed = 0;
         this.ctx = game.ctx;
         this.game = game;
+        this.color = "red";
     }
 
 
@@ -37,7 +38,7 @@ export class Letters {
 
     draw(ctx) {
         this.letter_arr.forEach((object)=>{
-            object.draw(ctx);
+            object.draw(ctx, this.color);
         });
     }
     set_letters(phrase) {

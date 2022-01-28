@@ -1,4 +1,5 @@
 import * as myGame from './game.js';
+import * as collisionSound from './sounds.js';
 
 
 let canvas = document.getElementById("gameScreen");
@@ -11,7 +12,6 @@ canvas.setAttribute("width", `${GAME_WIDTH}`);
 canvas.setAttribute("height",`${GAME_HEIGHT}`);
 bomb_canvas.setAttribute("width", `${GAME_WIDTH}`);
 bomb_canvas.setAttribute("height",`${GAME_HEIGHT}`);
-
 
 //bomb_ctx.fillStyle = 'red';
 //bomb_ctx.fillRect(200,200,500,500);
@@ -40,7 +40,7 @@ function gameLoop(timestamp) {
         game.update(deltaTime);
         game.draw(ctx);
     }
-    console.log(`${game.superbomb}`);
+    //console.log(`${game.superbomb}`);
 
 
     requestAnimationFrame(gameLoop);

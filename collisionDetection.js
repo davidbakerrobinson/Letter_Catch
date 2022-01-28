@@ -1,4 +1,4 @@
-export function detectCollision(otherObject, gameObject, isLetter = true, game) {
+export function detectCollision(otherObject, gameObject, isLetter = true,isRainbow=false, game) {
     let collision = false;
     let bottomOfObj;
     let topOfObj;
@@ -14,11 +14,10 @@ export function detectCollision(otherObject, gameObject, isLetter = true, game) 
     let topOfObject = gameObject.position.y;
     let leftSideObject = gameObject.position.x;
     let rightSideObject = gameObject.position.x + gameObject.width;
-    let bottomOfObject = gameObject.position.y + gameObject.height;
+    let bottomOfObject = gameObject.position.y +  gameObject.height;
 // console.log(bottomOfObject >= topOfObj);
 // console.log(bottomOfObject);
 // console.log(topOfObj)
-
     if (bottomOfObj >= topOfObject &&
         bottomOfObject >= topOfObj &&
         leftSideObject <= otherObject.position.x &&

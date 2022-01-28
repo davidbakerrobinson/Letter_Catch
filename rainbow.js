@@ -9,15 +9,17 @@ export class  Rainbow{
         this.position = {x: (game.sack.position.x + (game.sack.width/4) + this.offset), y: (game.sack.position.y + 20)};
         this.bar_width = this.find_bar_width();
         this.bar_height = 0;
+        this.height = this.bar_height;
         this.max_height = 75;
         this.color_array = this.create_color_array();
         this.reload_time = 1000; //in milliseconds
         this.game = game;
+        this.width = raw_width;
         this.firing_speed = 600;
         this.letterCollide = false;
         this.coalCollide = false;
         this.offScreen = false;
-        this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');
+        //this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');
         
          //change once update is implemented
         //console.log(this.color_array);
@@ -37,6 +39,8 @@ export class  Rainbow{
         //this.position.x = this.game.sack.position.x + (this.game.sack.width/4) + this.offset;
         if(this.bar_height > -this.max_height) {
             this.bar_height -= this.firing_speed * (deltaTime/1000);
+            this.height = this.bar_height;
+            console.log(this.height);
             this.color_array.forEach((color)=> {
                 //console.log(color.y);
                 color.height -= this.firing_speed * (deltaTime/1000);
@@ -52,11 +56,14 @@ export class  Rainbow{
             //need to loop through every single letter
         }
 
-        this.game.coals.coal_arr.forEach((coal_piece)=>{
-            if(detectCollision(coal_piece,this,false,this.game)) {
-                console.log("THIS WORKS");
+        this.game.coals.coal_arr.forEach((coal)=>{
+            if( (coal.position.x + coal.width) >= this.position.x 
+            && coal.position.x <= (this.position.x + this.rainbow_width)
+            && coal.position.y + coal.height <= this.position.y
+            && coal.position.y + coal.height  >= (this.position.y+this.bar_height)
+) {  
                 this.coalCollide = true;
-                coal_piece.hit = true;
+                ++coal.hit;
             }
         });
 
@@ -77,7 +84,9 @@ export class  Rainbow{
                 // `);
                 letter.hit = true;
                 this.letterCollide = true;
-                this.hit_sound.play();
+                this.game.hit_sound.res();
+                this.game.hit_sound.play();
+                //this.hit_sound = null;
             }
         });
         if(this.position.y <= 0) {
@@ -94,4 +103,5 @@ export class  Rainbow{
         }
         return color_array;
     }
+
 }

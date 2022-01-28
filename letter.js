@@ -26,10 +26,11 @@ export class Letter{
         let width = measure.width;
         this.letter_width = width;
         this.letter_height = measure.actualBoundingBoxAscent;
+        this.text_color = "red";
         //this.letter_width = this.ctx.measureText(this.letter).width;
-        this.successful_catch = new collisionSound.Sounds('./assets/sounds/Yeah.wav');
-        this.bad_catch = new collisionSound.Sounds('./assets/sounds/error.wav');
-        this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');
+        // this.successful_catch = new collisionSound.Sounds('./assets/sounds/Yeah.wav');
+        // this.bad_catch = new collisionSound.Sounds('./assets/sounds/error.wav');
+        //this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav');
         // console.log(this.letter_width);
         //set font size of letter
     }
@@ -44,15 +45,16 @@ export class Letter{
 
     }
 
-    draw(ctx) {
-        ctx.fillStyle = "red";
+    draw(ctx,color) {
+        ctx.fillStyle = color;
         ctx.fillText(this.letter, this.position.x, this.position.y);
     }
 
     update(deltaTime) {
         this.position.y += ((deltaTime/1000) * this.speed);
-        if(this.position.y >= this.gameHeight-15)
+        if(this.position.y >= this.gameHeight-15) {
             this.out_of_screen = true;
+        }
         // if(this.position.y >= this.game.sack.position.y 
         //     && (this.position.x + this.letter_width >= this.game.sack.position.x || this.position.x >= this.game.sack.position.x)
         //     && (this.position.x + this.letter_width <= (this.game.sack.position.x + this.game.sack.width) || this.position.x <= (this.game.sack.position.x + this.game.sack.width))
@@ -80,12 +82,14 @@ export class Letter{
                 if(this.letter === this.game.phrase[this.game.game_phrase.current_index]) {
                     //we have a hit
                     //make sound, change Game_Phrase letters, to reflect catch
-                    this.successful_catch.play();
+                    this.game.successful_catch.res();
+                    this.game.successful_catch.play();
                     this.game.game_phrase.set_success();
                 }
                 else {
                     //change Game_Phrase letters, to reflect an incorrect catch
-                    this.bad_catch.play();
+                    this.game.bad_catch.res();
+                    this.game.bad_catch.play();
                     this.game.game_phrase.set_failure();
                 }
                 this.game.game_phrase.update();

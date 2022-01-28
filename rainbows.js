@@ -7,7 +7,6 @@ export class Rainbows {
         this.game = game;
         this.time_since_add = 0;
         this.reload_time = 300;
-        this.firing_sound = new myShootSound.Sounds('./assets/sounds/Rainbow-shoot.wav');
     }
     shootRainbow() {
         //add a new rainbow to the rainbow_array
@@ -16,7 +15,8 @@ export class Rainbows {
         if(this.time_since_add >= this.reload_time )
         {
             this.rainbow_array.push(new myRainbow.Rainbow(this.game));
-            this.firing_sound.play();
+            this.game.firing_sound.res();
+            this.game.firing_sound.play();
             this.time_since_add = 0;
         }
     }

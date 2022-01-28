@@ -14,8 +14,17 @@ export class Coal_Pieces {
     update(deltaTime) {
         this.timeElapsed += deltaTime;      
         this.coal_arr = this.coal_arr
-        .filter((coal)=>coal.out_of_screen===false && coal.caught === false)
-        .filter((coal)=> coal.hit === false)
+        .filter((coal)=>coal.out_of_screen===false)
+        .filter((coal)=>{
+            if(coal.caught === true) {
+                //call netherworld transform function
+                this.game.switch_world();
+                return false;
+            }
+            else 
+                return true;
+        })
+        .filter((coal)=> coal.hit < 3)
         .map((object)=> { 
             object.update(deltaTime);
             return object;

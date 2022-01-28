@@ -9,7 +9,7 @@ export class Coal {
         this.ctx = game.ctx;
         this.out_of_screen = false;
         this.caught = false;
-        this.hit = false;
+        this.hit = 0;
         this.coal_image = document.getElementById('coal_piece');
         this.width = 30;
         this.height = 30;

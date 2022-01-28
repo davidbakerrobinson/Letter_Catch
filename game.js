@@ -8,6 +8,7 @@ import * as myRainbow from './rainbow.js';
 import * as myGame_Phrase from './Game_Phrase.js';
 import * as sup_bomb from './superbombs.js';
 import * as myPieces from './coal_pieces.js';
+import * as collisionSound from './sounds.js';
 /*
 const GAMESTATE = {
     PAUSED: 0,
@@ -24,7 +25,34 @@ export class Game {
         this.ctx = ctx;
         this.bomb_ctx = bomb_ctx;
         this.superbomb = false;
+        this.world = 1;
+        this.reset_world;
     }
+
+    switch_world() {
+        let back_ground = document.getElementById('gameScreen');
+        if(this.world === -1) {
+            clearTimeout(this.reset_world);
+        }
+        else {
+            back_ground.style.background = "url('./assets/images/underworld2.png')";
+            //back_ground.setAttribute('src','./assets/images/underworld2.png');
+            this.sack.sack_image = document.getElementById('under_sack');
+            this.letters.color = "rgb(0,255,255)";
+            this.world = -1;
+        }
+        this.coal_song.res();
+        this.coal_song.play();
+        this.reset_world = setTimeout(()=> {
+            back_ground.style.background = "url('./assets/images/normal_background.png')";
+            this.letters.color = "rgb(255,0,0)";
+            this.sack.sack_image = document.getElementById('sack');
+            //back_ground.setAttribute('src','./assets/images/normal_background.png');
+            this.world = 1;
+        }, 10000);  
+    }
+
+
 
     start() {
         this.sack = new userSack.Sack(this);
@@ -36,6 +64,14 @@ export class Game {
         //this.ball = new myBall.Ball(this);
         this.letters = new myletters.Letters(this);
         this.coals = new myPieces.Coal_Pieces(this);
+
+        //sounds        
+        this.successful_catch = new collisionSound.Sounds('./assets/sounds/Yeah.wav', 'success_catch');
+        this.bad_catch = new collisionSound.Sounds('./assets/sounds/error.wav','bad_catch');
+        this.hit_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-collision.wav','hit_sound');
+        this.firing_sound = new collisionSound.Sounds('./assets/sounds/Rainbow-shoot.wav','fire');
+        this.coal_song = new collisionSound.Sounds('./assets/sounds/Bag_of_coal_song.wav','coal');
+
         //console.log(this.bombs);
         //this.rainbow = new myRainbow.Rainbow(this);
         this.gameObjects = [this.sack, this.letters, this.bombs, this.coals];
